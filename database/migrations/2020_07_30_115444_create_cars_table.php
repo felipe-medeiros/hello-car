@@ -19,7 +19,9 @@ class CreateCarsTable extends Migration
             $table->date('data_compra');
             $table->date('data_venda');
             $table->enum('situacao', ['Em uso', 'Em manutenção', 'Vendido']);
-            $table->foreign('modelo_id')->references('id')->on('types');
+            $table->foreignId('type_id')
+                ->constrained()
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
