@@ -12,11 +12,14 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::veiculosModelos();
+        $situacao = $request->isMethod('GET') ? $request->situacao : null;
+
+        $cars = Car::veiculosModelosFiltro($situacao, $request->data_de, $request->data_a);
 
         return view('veiculo.lista')->with(['cars' => $cars]);
     }
@@ -60,7 +63,7 @@ class CarController extends Controller
 
         $car->save();
 
-        dd([$type, $car]);
+        return $this->index($request);
     }
 
     /**
@@ -80,9 +83,11 @@ class CarController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function edit(Car $car)
+    public function edit($carId)
     {
-        //
+        $car = Car::veiculoModelo($carId);
+
+        return view('veiculo.form')->with(['car' => $car]);
     }
 
     /**
@@ -94,7 +99,7 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        //
+        return $this->store($request);
     }
 
     /**
