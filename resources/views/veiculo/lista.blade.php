@@ -46,7 +46,7 @@
                     <tr>
                 @endif
                 <td>{{ $car->nome }}</td><td>{{ $car->placa }}</td><td>{{ $car->fabricante }}</td>
-                <td>{{ $car->situacao }}</td><td>{{ $car->data_compra }}</td><td>{{ $car->data_venda ? $car->data_venda : '-' }}</td>
+                <td>{{ $car->situacao }}</td><td>{{ (new \Carbon\Carbon($car->data_compra))->format('d/m/Y') }}</td><td>{{ $car->data_venda ? (new \Carbon\Carbon($car->data_venda))->format('d/m/Y') : '-' }}</td>
                 <td><a href="{{ route('cars.edit', $car->id) }}" class="btn btn-secondary">Editar</a></td></tr>
             @empty
                 <tr><td colspan="8"><h6>Nenhum veículo encontrado.</h6></td></tr>

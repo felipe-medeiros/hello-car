@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -33,8 +34,10 @@ class Car extends Model
             $select->where('cars.situacao', '=', $situacao);
         }
 
-        if ($dataCompraDe && $dataCompraA) {
-            $select->whereBetween('data_compra', [date($dataCompraDe), date($dataCompraA)]);
+        if ($dataCompraDe) {
+            $dataCompra = $dataCompraA ? $dataCompraA : Carbon::now();
+
+            $select->whereBetween('data_compra', [date($dataCompraDe), date($dataCompra)]);
         }
 
         return $select->get();
