@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\Type;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -15,7 +16,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::all();
+        $cars = Car::veiculosModelos();
 
         return view('veiculo.lista')->with(['cars' => $cars]);
     }
@@ -38,7 +39,28 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $type = Type::firstOrNew([
+            'nome'       => strtoupper($request->nome),
+            'fabricante' => $request->fabricante
+        ]);
+
+        $type->save();
+
+        $car = Car::firstOrNew([
+            'placa' => strtoupper($request->placa)
+        ]);
+
+        $car->fill([
+            'situacao'    => $request->situacao,
+            'data_compra' => $request->data_compra,
+            'data_venda'  => $request->data_venda
+        ]);
+
+        $car->type()->associate($type);
+
+        $car->save();
+
+        dd([$type, $car]);
     }
 
     /**

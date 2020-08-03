@@ -7,12 +7,12 @@
         <div class="form-row">
             <div class="col">
                 <label for="placa">Placa*:</label>
-                <input id="placa" class="form-control" type="text" maxlength="7" required>
+                <input id="placa" name="placa" class="form-control" type="text" maxlength="7" required>
             </div>
 
             <div class="col">
-                <label for="modelo">Modelo*:</label>
-                <input id="nome" class="form-control" type="text" maxlength="50" required>
+                <label for="nome">Modelo*:</label>
+                <input id="nome" name="nome" class="form-control" type="text" maxlength="50" required>
             </div>
 
             <div class="col">
@@ -37,13 +37,13 @@
             </div>
 
             <div class="col">
-                <label for="data-compra">Data da Compra*:</label>
-                <input id="data-compra" name="data-compra" type="date" class="form-control" required>
+                <label for="data_compra">Data da Compra*:</label>
+                <input id="data_compra" name="data_compra" type="date" class="form-control" required>
             </div>
 
             <div class="col">
-                <label for="data-venda">Data da Venda:</label>
-                <input id="data-venda" name="data-venda" type="date" class="form-control">
+                <label for="data_venda">Data da Venda:</label>
+                <input id="data_venda" name="data_venda" type="date" class="form-control">
             </div>
         </div><br>
         <a href="{{ route('cars.index') }}" class="btn btn-info">Voltar</a>

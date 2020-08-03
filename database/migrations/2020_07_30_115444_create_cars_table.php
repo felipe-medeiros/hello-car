@@ -15,13 +15,13 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string('placa', 7)->unique();
-            $table->date('data_compra');
-            $table->date('data_venda');
-            $table->enum('situacao', ['Em uso', 'Em manutenção', 'Vendido']);
             $table->foreignId('type_id')
                 ->constrained()
                 ->onDelete('cascade');
+            $table->string('placa', 7)->unique();
+            $table->date('data_compra');
+            $table->date('data_venda')->nullable();
+            $table->enum('situacao', ['Em uso', 'Em manutenção', 'Vendido']);
             $table->timestamps();
         });
     }
